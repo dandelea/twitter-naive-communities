@@ -1,0 +1,10 @@
+setuptools
+scikit-learn
+nltk
+gensim
+angus-sdk-python
+pymongo
+tweepy
+lxml
+Flask
+Flask-Script
