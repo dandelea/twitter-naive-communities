@@ -1,0 +1,230 @@
+{
+	"variables": [],
+	"info": {
+		"name": "twitter-naive-communities",
+		"_postman_id": "87867449-3f9a-c8ab-ba73-14c0c181f68c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/ Routes list",
+			"request": {
+				"url": "{{protocol}}://{{host}}:{{port}}/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Returns the list of endpoints."
+			},
+			"response": []
+		},
+		{
+			"name": "Highest ratio follower",
+			"request": {
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}/api/ratio?seed={{seed}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"ratio"
+					],
+					"query": [
+						{
+							"key": "seed",
+							"value": "{{seed}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Active users",
+			"request": {
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}/api/activeusers?seed={{seed}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"activeusers"
+					],
+					"query": [
+						{
+							"key": "seed",
+							"value": "{{seed}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Gender proportion",
+			"request": {
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}/api/gender?seed={{seed}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"gender"
+					],
+					"query": [
+						{
+							"key": "seed",
+							"value": "{{seed}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Age proportion",
+			"request": {
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}/api/age?seed={{seed}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"age"
+					],
+					"query": [
+						{
+							"key": "seed",
+							"value": "{{seed}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Hours",
+			"request": {
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}/api/hours?seed={{seed}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"hours"
+					],
+					"query": [
+						{
+							"key": "seed",
+							"value": "{{seed}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Main influencers",
+			"request": {
+				"url": "{{protocol}}://{{host}}:{{port}}/api/influencers",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Twitter users map",
+			"request": {
+				"url": "{{protocol}}://{{host}}:{{port}}/api/map",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "GeoJSON"
+			},
+			"response": []
+		},
+		{
+			"name": "Sentiment analysis",
+			"request": {
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}/api/sentiment?topic={{topic}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"sentiment"
+					],
+					"query": [
+						{
+							"key": "topic",
+							"value": "{{topic}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
