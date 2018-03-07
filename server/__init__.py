@@ -1,10 +1,13 @@
 '''This script manages the flask server'''
-
-from flask import abort, jsonify, Flask, send_file, request, url_for, send_from_directory
-from logging.handlers import RotatingFileHandler
 from pprint import pprint
 
-import logging, json, os, subprocess
+import logging
+import json
+import os
+import subprocess
+
+from flask import abort, jsonify, Flask, send_file, request, url_for, send_from_directory
+
 from database import Database
 
 app = Flask(__name__, static_folder='static', static_url_path='')
@@ -16,7 +19,7 @@ database = Database()
 formatter = logging.Formatter(
     '[%(asctime)s] p%(process)s {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s'
 )
-logHandler = RotatingFileHandler('info.log', maxBytes=1000, backupCount=1)
+logHandler = logging.handlers.RotatingFileHandler('info.log', maxBytes=1000, backupCount=1)
 logHandler.setLevel(logging.INFO)
 logHandler.setFormatter(formatter)
 app.logger.setLevel(logging.INFO)
@@ -88,17 +91,17 @@ def gender():
     if screen_name:
         seed = database.find_seed_by_screen_name(screen_name)
         if seed:
-            gender = database.gender_proportion(seed['id'])
+            gender_proportion = database.gender_proportion()
             result = [
                 {
                     "name" : "Male",
-                    "value" : gender['male']*100/gender['total'],
+                    "value" : gender_proportion['male']*100/gender_proportion['total'],
                     "color" : "#FEC514",
                     "face" : "https://www.amcharts.com/lib/images/faces/C02.png"
                 },
                 {
                     "name" : "Female",
-                    "value" : gender['female']*100/gender['total'],
+                    "value" : gender_proportion['female']*100/gender_proportion['total'],
                     "color" : "#DB4C3C",
                     "face" : "https://www.amcharts.com/lib/images/faces/D02.png"
                 }
@@ -115,9 +118,9 @@ def age():
     if screen_name:
         seed = database.find_seed_by_screen_name(screen_name)
         if seed:
-            age = database.age_proportion(seed['id'])
+            age_proportion = database.age_proportion(seed['id'])
             result = []
-            for age_group in age['count']:
+            for age_group in age_proportion['count']:
                 entry = {
                     "count" : age_group['count'],
                 }
@@ -164,10 +167,10 @@ def hours():
                 "#2A0CD0",
                 "#8A0CCF"
             ]
-            hours = seed['followers_hours']
+            followers_hours = seed['followers_hours']
             result = []
-            for hour in sorted(hours.keys()):
-                value = hours[hour]
+            for hour in sorted(followers_hours.keys()):
+                value = followers_hours[hour]
                 entry = {
                     "name" : hour,
                     "value" : value,
@@ -186,9 +189,9 @@ def influencers():
     return jsonify(result)
 
 @app.route('/api/map', methods=['GET'])
-def map():
-    with open('tweets_map.json') as file:
-        json_data = json.load(file)
+def tweets_map():
+    with open('tweets_map.json') as file_input:
+        json_data = json.load(file_input)
 
     return jsonify(json_data)
 
@@ -203,13 +206,11 @@ def sentiment():
                 "name" : "Positive",
                 "value" : topic['sentiment']['P']*100/total,
                 "color" : "#42F450"
-            },
-            {
+            }, {
                 "name" : "Negative",
                 "value" : topic['sentiment']['N']*100/total,
                 "color" : "#DB4C3C"
-            },
-            {
+            }, {
                 "name" : "Neutral",
                 "value" : topic['sentiment']['NEU']*100/total,
                 "color" : "#A6A6A6"
@@ -218,9 +219,7 @@ def sentiment():
         else:
             abort(404)
     else:
-        aboirt(404)
-    
-
+        abort(404)
 
 ''' Main routine '''
 
